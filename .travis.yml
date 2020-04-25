@@ -8,3 +8,16 @@ before_install:
 
 script: 
     - docker run -e CI=true jglatter/frontend yarn test --coverage
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: "docker-play"
+    env: "DockerPlay-env"
+    bucket_name: "elasticbeanstalk-us-east-1-365243244952"
+    bucket_path: "docker-play"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+
